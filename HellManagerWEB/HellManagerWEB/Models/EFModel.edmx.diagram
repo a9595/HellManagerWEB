@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="bc1274708e2f475896a2f0ca257d7d41" Name="Diagram1">
+        <EntityTypeShape EntityType="HellDBModel.Gender" Width="1.5" PointX="5.25" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HellDBModel.PunisherRank" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HellDBModel.Punisher" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="HellDBModel.Punishment" Width="1.5" PointX="3" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="HellDBModel.SinDegree" Width="1.5" PointX="3" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="HellDBModel.Sinner" Width="1.5" PointX="7.5" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="HellDBModel.Sin" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="HellDBModel.FK_SinnerGender" ManuallyRouted="false" />
+        <AssociationConnector Association="HellDBModel.FK_PunisherRankPunisher" ManuallyRouted="false" />
+        <AssociationConnector Association="HellDBModel.FK_SinPunisher" ManuallyRouted="false" />
+        <AssociationConnector Association="HellDBModel.FK_SinPunishment" ManuallyRouted="false" />
+        <AssociationConnector Association="HellDBModel.FK_SinDegreeSin" ManuallyRouted="false" />
+        <AssociationConnector Association="HellDBModel.SinnerSin" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

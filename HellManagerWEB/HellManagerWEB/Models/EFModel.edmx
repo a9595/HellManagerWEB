@@ -1,0 +1,1096 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="HellDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Genders">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PunisherRanks">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Punishers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="32" />
+          <Property Name="PunisherRankId" Type="int" />
+        </EntityType>
+        <EntityType Name="Punishments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="TreatCycle" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="SinDegrees">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="Value" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sinners">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="32" Nullable="false" />
+          <Property Name="Age" Type="int" />
+          <Property Name="JobTitle" Type="nvarchar" MaxLength="50" />
+          <Property Name="Salary" Type="int" />
+          <Property Name="GenderId" Type="int" />
+        </EntityType>
+        <EntityType Name="SinnerSin">
+          <Key>
+            <PropertyRef Name="Sinners_Id" />
+            <PropertyRef Name="Sins_Id" />
+          </Key>
+          <Property Name="Sinners_Id" Type="int" Nullable="false" />
+          <Property Name="Sins_Id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sins">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="PunishmentId" Type="int" Nullable="false" />
+          <Property Name="PunisherId" Type="int" Nullable="false" />
+          <Property Name="SinDegreeId" Type="int" />
+        </EntityType>
+        <Association Name="FK_PunisherRankPunisher">
+          <End Role="PunisherRanks" Type="Self.PunisherRanks" Multiplicity="0..1" />
+          <End Role="Punishers" Type="Self.Punishers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PunisherRanks">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Punishers">
+              <PropertyRef Name="PunisherRankId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SinDegreeSin">
+          <End Role="SinDegrees" Type="Self.SinDegrees" Multiplicity="0..1" />
+          <End Role="Sins" Type="Self.Sins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SinDegrees">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sins">
+              <PropertyRef Name="SinDegreeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SinnerGender">
+          <End Role="Genders" Type="Self.Genders" Multiplicity="0..1" />
+          <End Role="Sinners" Type="Self.Sinners" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genders">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sinners">
+              <PropertyRef Name="GenderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SinnerSin_Sin">
+          <End Role="Sins" Type="Self.Sins" Multiplicity="1" />
+          <End Role="SinnerSin" Type="Self.SinnerSin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sins">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SinnerSin">
+              <PropertyRef Name="Sins_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SinnerSin_Sinner">
+          <End Role="Sinners" Type="Self.Sinners" Multiplicity="1" />
+          <End Role="SinnerSin" Type="Self.SinnerSin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sinners">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SinnerSin">
+              <PropertyRef Name="Sinners_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SinPunisher">
+          <End Role="Punishers" Type="Self.Punishers" Multiplicity="1" />
+          <End Role="Sins" Type="Self.Sins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Punishers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sins">
+              <PropertyRef Name="PunisherId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SinPunishment">
+          <End Role="Punishments" Type="Self.Punishments" Multiplicity="1" />
+          <End Role="Sins" Type="Self.Sins" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Punishments">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sins">
+              <PropertyRef Name="PunishmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="usp_GendersDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_GendersInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Name" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="usp_GendersSelect" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_GendersUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+          <Parameter Name="Name" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="usp_PunisherRanksDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_PunisherRanksInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Name" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="usp_PunisherRanksSelect" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_PunisherRanksUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+          <Parameter Name="Name" Type="nvarchar" Mode="In" />
+        </Function>
+        <Function Name="usp_PunishersDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_PunishersInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="Phone" Type="nvarchar" Mode="In" />
+          <Parameter Name="PunisherRankId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_PunishersSelect" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_PunishersUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+          <Parameter Name="Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="Phone" Type="nvarchar" Mode="In" />
+          <Parameter Name="PunisherRankId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_PunishmentsDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_PunishmentsInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="TreatCycle" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_PunishmentsSelect" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_PunishmentsUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+          <Parameter Name="Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="TreatCycle" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_SinDegreesDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_SinDegreesInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="Value" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_SinDegreesSelect" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_SinDegreesUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+          <Parameter Name="Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="Value" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_SinnersDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_SinnerSinDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Sinners_Id" Type="int" Mode="In" />
+          <Parameter Name="Sins_Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_SinnerSinInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Sinners_Id" Type="int" Mode="In" />
+          <Parameter Name="Sins_Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_SinnerSinSelect" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Sinners_Id" Type="int" Mode="In" />
+          <Parameter Name="Sins_Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_SinnersInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FullName" Type="nvarchar" Mode="In" />
+          <Parameter Name="Age" Type="int" Mode="In" />
+          <Parameter Name="JobTitle" Type="nvarchar" Mode="In" />
+          <Parameter Name="Salary" Type="int" Mode="In" />
+          <Parameter Name="GenderId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_SinnerSinUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Sinners_Id" Type="int" Mode="In" />
+          <Parameter Name="Sins_Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_SinnersSelect" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_SinnersUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+          <Parameter Name="FullName" Type="nvarchar" Mode="In" />
+          <Parameter Name="Age" Type="int" Mode="In" />
+          <Parameter Name="JobTitle" Type="nvarchar" Mode="In" />
+          <Parameter Name="Salary" Type="int" Mode="In" />
+          <Parameter Name="GenderId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_SinsDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_SinsInsert" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="PunishmentId" Type="int" Mode="In" />
+          <Parameter Name="PunisherId" Type="int" Mode="In" />
+          <Parameter Name="SinDegreeId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_SinsSelect" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+        </Function>
+        <Function Name="usp_SinsUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Id" Type="int" Mode="In" />
+          <Parameter Name="Name" Type="nvarchar" Mode="In" />
+          <Parameter Name="PunishmentId" Type="int" Mode="In" />
+          <Parameter Name="PunisherId" Type="int" Mode="In" />
+          <Parameter Name="SinDegreeId" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="HellDBModelStoreContainer">
+          <EntitySet Name="Genders" EntityType="Self.Genders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PunisherRanks" EntityType="Self.PunisherRanks" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Punishers" EntityType="Self.Punishers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Punishments" EntityType="Self.Punishments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SinDegrees" EntityType="Self.SinDegrees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sinners" EntityType="Self.Sinners" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SinnerSin" EntityType="Self.SinnerSin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sins" EntityType="Self.Sins" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_PunisherRankPunisher" Association="Self.FK_PunisherRankPunisher">
+            <End Role="PunisherRanks" EntitySet="PunisherRanks" />
+            <End Role="Punishers" EntitySet="Punishers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SinDegreeSin" Association="Self.FK_SinDegreeSin">
+            <End Role="SinDegrees" EntitySet="SinDegrees" />
+            <End Role="Sins" EntitySet="Sins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SinnerGender" Association="Self.FK_SinnerGender">
+            <End Role="Genders" EntitySet="Genders" />
+            <End Role="Sinners" EntitySet="Sinners" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SinnerSin_Sin" Association="Self.FK_SinnerSin_Sin">
+            <End Role="Sins" EntitySet="Sins" />
+            <End Role="SinnerSin" EntitySet="SinnerSin" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SinnerSin_Sinner" Association="Self.FK_SinnerSin_Sinner">
+            <End Role="Sinners" EntitySet="Sinners" />
+            <End Role="SinnerSin" EntitySet="SinnerSin" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SinPunisher" Association="Self.FK_SinPunisher">
+            <End Role="Punishers" EntitySet="Punishers" />
+            <End Role="Sins" EntitySet="Sins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SinPunishment" Association="Self.FK_SinPunishment">
+            <End Role="Punishments" EntitySet="Punishments" />
+            <End Role="Sins" EntitySet="Sins" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HellDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Gender">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Sinners" Relationship="Self.FK_SinnerGender" FromRole="Genders" ToRole="Sinners" />
+        </EntityType>
+        <EntityType Name="PunisherRank">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Punishers" Relationship="Self.FK_PunisherRankPunisher" FromRole="PunisherRanks" ToRole="Punishers" />
+        </EntityType>
+        <EntityType Name="Punisher">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Phone" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="PunisherRankId" Type="Int32" />
+          <NavigationProperty Name="PunisherRank" Relationship="Self.FK_PunisherRankPunisher" FromRole="Punishers" ToRole="PunisherRanks" />
+          <NavigationProperty Name="Sins" Relationship="Self.FK_SinPunisher" FromRole="Punishers" ToRole="Sins" />
+        </EntityType>
+        <EntityType Name="Punishment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="TreatCycle" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Sins" Relationship="Self.FK_SinPunishment" FromRole="Punishments" ToRole="Sins" />
+        </EntityType>
+        <EntityType Name="SinDegree">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Value" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Sins" Relationship="Self.FK_SinDegreeSin" FromRole="SinDegrees" ToRole="Sins" />
+        </EntityType>
+        <EntityType Name="Sinner">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FullName" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Age" Type="Int32" />
+          <Property Name="JobTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Salary" Type="Int32" />
+          <Property Name="GenderId" Type="Int32" />
+          <NavigationProperty Name="Gender" Relationship="Self.FK_SinnerGender" FromRole="Sinners" ToRole="Genders" />
+          <NavigationProperty Name="Sins" Relationship="Self.SinnerSin" FromRole="Sinners" ToRole="Sins" />
+        </EntityType>
+        <EntityType Name="Sin">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PunishmentId" Type="Int32" Nullable="false" />
+          <Property Name="PunisherId" Type="Int32" Nullable="false" />
+          <Property Name="SinDegreeId" Type="Int32" />
+          <NavigationProperty Name="Punisher" Relationship="Self.FK_SinPunisher" FromRole="Sins" ToRole="Punishers" />
+          <NavigationProperty Name="Punishment" Relationship="Self.FK_SinPunishment" FromRole="Sins" ToRole="Punishments" />
+          <NavigationProperty Name="SinDegree" Relationship="Self.FK_SinDegreeSin" FromRole="Sins" ToRole="SinDegrees" />
+          <NavigationProperty Name="Sinners" Relationship="Self.SinnerSin" FromRole="Sins" ToRole="Sinners" />
+        </EntityType>
+        <Association Name="FK_SinnerGender">
+          <End Role="Genders" Type="Self.Gender" Multiplicity="0..1" />
+          <End Role="Sinners" Type="Self.Sinner" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Genders">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sinners">
+              <PropertyRef Name="GenderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PunisherRankPunisher">
+          <End Role="PunisherRanks" Type="Self.PunisherRank" Multiplicity="0..1" />
+          <End Role="Punishers" Type="Self.Punisher" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PunisherRanks">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Punishers">
+              <PropertyRef Name="PunisherRankId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SinPunisher">
+          <End Role="Punishers" Type="Self.Punisher" Multiplicity="1" />
+          <End Role="Sins" Type="Self.Sin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Punishers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sins">
+              <PropertyRef Name="PunisherId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SinPunishment">
+          <End Role="Punishments" Type="Self.Punishment" Multiplicity="1" />
+          <End Role="Sins" Type="Self.Sin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Punishments">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sins">
+              <PropertyRef Name="PunishmentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SinDegreeSin">
+          <End Role="SinDegrees" Type="Self.SinDegree" Multiplicity="0..1" />
+          <End Role="Sins" Type="Self.Sin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SinDegrees">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Sins">
+              <PropertyRef Name="SinDegreeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SinnerSin">
+          <End Role="Sins" Type="Self.Sin" Multiplicity="*" />
+          <End Role="Sinners" Type="Self.Sinner" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="ConnectionStringHellDB" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Genders" EntityType="Self.Gender" />
+          <EntitySet Name="PunisherRanks" EntityType="Self.PunisherRank" />
+          <EntitySet Name="Punishers" EntityType="Self.Punisher" />
+          <EntitySet Name="Punishments" EntityType="Self.Punishment" />
+          <EntitySet Name="SinDegrees" EntityType="Self.SinDegree" />
+          <EntitySet Name="Sinners" EntityType="Self.Sinner" />
+          <EntitySet Name="Sins" EntityType="Self.Sin" />
+          <AssociationSet Name="FK_SinnerGender" Association="Self.FK_SinnerGender">
+            <End Role="Genders" EntitySet="Genders" />
+            <End Role="Sinners" EntitySet="Sinners" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PunisherRankPunisher" Association="Self.FK_PunisherRankPunisher">
+            <End Role="PunisherRanks" EntitySet="PunisherRanks" />
+            <End Role="Punishers" EntitySet="Punishers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SinPunisher" Association="Self.FK_SinPunisher">
+            <End Role="Punishers" EntitySet="Punishers" />
+            <End Role="Sins" EntitySet="Sins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SinPunishment" Association="Self.FK_SinPunishment">
+            <End Role="Punishments" EntitySet="Punishments" />
+            <End Role="Sins" EntitySet="Sins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SinDegreeSin" Association="Self.FK_SinDegreeSin">
+            <End Role="SinDegrees" EntitySet="SinDegrees" />
+            <End Role="Sins" EntitySet="Sins" />
+          </AssociationSet>
+          <AssociationSet Name="SinnerSin" Association="Self.SinnerSin">
+            <End Role="Sins" EntitySet="Sins" />
+            <End Role="Sinners" EntitySet="Sinners" />
+          </AssociationSet>
+          <FunctionImport Name="usp_GendersDelete">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_GendersInsert" ReturnType="Collection(HellDBModel.usp_GendersInsert_Result)">
+            <Parameter Name="Name" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_GendersSelect" ReturnType="Collection(HellDBModel.usp_GendersSelect_Result)">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_GendersUpdate" ReturnType="Collection(HellDBModel.usp_GendersUpdate_Result)">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+            <Parameter Name="Name" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_PunisherRanksDelete">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_PunisherRanksInsert" ReturnType="Collection(HellDBModel.usp_PunisherRanksInsert_Result)">
+            <Parameter Name="Name" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_PunisherRanksSelect" ReturnType="Collection(HellDBModel.usp_PunisherRanksSelect_Result)">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_PunisherRanksUpdate" ReturnType="Collection(HellDBModel.usp_PunisherRanksUpdate_Result)">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+            <Parameter Name="Name" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="usp_PunishersDelete">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_PunishersInsert" ReturnType="Collection(HellDBModel.usp_PunishersInsert_Result)">
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Phone" Mode="In" Type="String" />
+            <Parameter Name="PunisherRankId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_PunishersSelect" ReturnType="Collection(HellDBModel.usp_PunishersSelect_Result)">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_PunishersUpdate" ReturnType="Collection(HellDBModel.usp_PunishersUpdate_Result)">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Phone" Mode="In" Type="String" />
+            <Parameter Name="PunisherRankId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_PunishmentsDelete">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_PunishmentsInsert" ReturnType="Collection(HellDBModel.usp_PunishmentsInsert_Result)">
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="TreatCycle" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_PunishmentsSelect" ReturnType="Collection(HellDBModel.usp_PunishmentsSelect_Result)">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_PunishmentsUpdate" ReturnType="Collection(HellDBModel.usp_PunishmentsUpdate_Result)">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="TreatCycle" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_SinDegreesDelete">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_SinDegreesInsert" ReturnType="Collection(HellDBModel.usp_SinDegreesInsert_Result)">
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Value" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_SinDegreesSelect" ReturnType="Collection(HellDBModel.usp_SinDegreesSelect_Result)">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_SinDegreesUpdate" ReturnType="Collection(HellDBModel.usp_SinDegreesUpdate_Result)">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Value" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_SinnersDelete">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_SinnerSinDelete">
+            <Parameter Name="Sinners_Id" Mode="In" Type="Int32" />
+            <Parameter Name="Sins_Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_SinnerSinInsert" ReturnType="Collection(HellDBModel.usp_SinnerSinInsert_Result)">
+            <Parameter Name="Sinners_Id" Mode="In" Type="Int32" />
+            <Parameter Name="Sins_Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_SinnerSinSelect" ReturnType="Collection(HellDBModel.usp_SinnerSinSelect_Result)">
+            <Parameter Name="Sinners_Id" Mode="In" Type="Int32" />
+            <Parameter Name="Sins_Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_SinnersInsert" ReturnType="Collection(HellDBModel.usp_SinnersInsert_Result)">
+            <Parameter Name="FullName" Mode="In" Type="String" />
+            <Parameter Name="Age" Mode="In" Type="Int32" />
+            <Parameter Name="JobTitle" Mode="In" Type="String" />
+            <Parameter Name="Salary" Mode="In" Type="Int32" />
+            <Parameter Name="GenderId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_SinnerSinUpdate" ReturnType="Collection(HellDBModel.usp_SinnerSinUpdate_Result)">
+            <Parameter Name="Sinners_Id" Mode="In" Type="Int32" />
+            <Parameter Name="Sins_Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_SinnersSelect" ReturnType="Collection(HellDBModel.usp_SinnersSelect_Result)">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_SinnersUpdate" ReturnType="Collection(HellDBModel.usp_SinnersUpdate_Result)">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+            <Parameter Name="FullName" Mode="In" Type="String" />
+            <Parameter Name="Age" Mode="In" Type="Int32" />
+            <Parameter Name="JobTitle" Mode="In" Type="String" />
+            <Parameter Name="Salary" Mode="In" Type="Int32" />
+            <Parameter Name="GenderId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_SinsDelete">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_SinsInsert" ReturnType="Collection(HellDBModel.usp_SinsInsert_Result)">
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="PunishmentId" Mode="In" Type="Int32" />
+            <Parameter Name="PunisherId" Mode="In" Type="Int32" />
+            <Parameter Name="SinDegreeId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_SinsSelect" ReturnType="Collection(HellDBModel.usp_SinsSelect_Result)">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="usp_SinsUpdate" ReturnType="Collection(HellDBModel.usp_SinsUpdate_Result)">
+            <Parameter Name="Id" Mode="In" Type="Int32" />
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="PunishmentId" Mode="In" Type="Int32" />
+            <Parameter Name="PunisherId" Mode="In" Type="Int32" />
+            <Parameter Name="SinDegreeId" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="usp_GendersInsert_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="usp_GendersSelect_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="usp_GendersUpdate_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="usp_PunisherRanksInsert_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="32" />
+        </ComplexType>
+        <ComplexType Name="usp_PunisherRanksSelect_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="32" />
+        </ComplexType>
+        <ComplexType Name="usp_PunisherRanksUpdate_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="32" />
+        </ComplexType>
+        <ComplexType Name="usp_PunishersInsert_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="32" />
+          <Property Type="String" Name="Phone" Nullable="true" MaxLength="32" />
+          <Property Type="Int32" Name="PunisherRankId" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="usp_PunishersSelect_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="32" />
+          <Property Type="String" Name="Phone" Nullable="true" MaxLength="32" />
+          <Property Type="Int32" Name="PunisherRankId" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="usp_PunishersUpdate_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="32" />
+          <Property Type="String" Name="Phone" Nullable="true" MaxLength="32" />
+          <Property Type="Int32" Name="PunisherRankId" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="usp_PunishmentsInsert_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="256" />
+          <Property Type="Int32" Name="TreatCycle" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="usp_PunishmentsSelect_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="256" />
+          <Property Type="Int32" Name="TreatCycle" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="usp_PunishmentsUpdate_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="256" />
+          <Property Type="Int32" Name="TreatCycle" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="usp_SinDegreesInsert_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="32" />
+          <Property Type="Int32" Name="Value" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="usp_SinDegreesSelect_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="32" />
+          <Property Type="Int32" Name="Value" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="usp_SinDegreesUpdate_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="32" />
+          <Property Type="Int32" Name="Value" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="usp_SinnerSinInsert_Result">
+          <Property Type="Int32" Name="Sinners_Id" Nullable="false" />
+          <Property Type="Int32" Name="Sins_Id" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="usp_SinnerSinSelect_Result">
+          <Property Type="Int32" Name="Sinners_Id" Nullable="false" />
+          <Property Type="Int32" Name="Sins_Id" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="usp_SinnersInsert_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="FullName" Nullable="false" MaxLength="32" />
+          <Property Type="Int32" Name="Age" Nullable="true" />
+          <Property Type="String" Name="JobTitle" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Salary" Nullable="true" />
+          <Property Type="Int32" Name="GenderId" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="usp_SinnerSinUpdate_Result">
+          <Property Type="Int32" Name="Sinners_Id" Nullable="false" />
+          <Property Type="Int32" Name="Sins_Id" Nullable="false" />
+        </ComplexType>
+        <ComplexType Name="usp_SinnersSelect_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="FullName" Nullable="false" MaxLength="32" />
+          <Property Type="Int32" Name="Age" Nullable="true" />
+          <Property Type="String" Name="JobTitle" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Salary" Nullable="true" />
+          <Property Type="Int32" Name="GenderId" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="usp_SinnersUpdate_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="FullName" Nullable="false" MaxLength="32" />
+          <Property Type="Int32" Name="Age" Nullable="true" />
+          <Property Type="String" Name="JobTitle" Nullable="true" MaxLength="50" />
+          <Property Type="Int32" Name="Salary" Nullable="true" />
+          <Property Type="Int32" Name="GenderId" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="usp_SinsInsert_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="500" />
+          <Property Type="Int32" Name="PunishmentId" Nullable="false" />
+          <Property Type="Int32" Name="PunisherId" Nullable="false" />
+          <Property Type="Int32" Name="SinDegreeId" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="usp_SinsSelect_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="500" />
+          <Property Type="Int32" Name="PunishmentId" Nullable="false" />
+          <Property Type="Int32" Name="PunisherId" Nullable="false" />
+          <Property Type="Int32" Name="SinDegreeId" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="usp_SinsUpdate_Result">
+          <Property Type="Int32" Name="Id" Nullable="false" />
+          <Property Type="String" Name="Name" Nullable="false" MaxLength="500" />
+          <Property Type="Int32" Name="PunishmentId" Nullable="false" />
+          <Property Type="Int32" Name="PunisherId" Nullable="false" />
+          <Property Type="Int32" Name="SinDegreeId" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HellDBModelStoreContainer" CdmEntityContainer="ConnectionStringHellDB">
+          <EntitySetMapping Name="Genders">
+            <EntityTypeMapping TypeName="HellDBModel.Gender">
+              <MappingFragment StoreEntitySet="Genders">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PunisherRanks">
+            <EntityTypeMapping TypeName="HellDBModel.PunisherRank">
+              <MappingFragment StoreEntitySet="PunisherRanks">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Punishers">
+            <EntityTypeMapping TypeName="HellDBModel.Punisher">
+              <MappingFragment StoreEntitySet="Punishers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="PunisherRankId" ColumnName="PunisherRankId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Punishments">
+            <EntityTypeMapping TypeName="HellDBModel.Punishment">
+              <MappingFragment StoreEntitySet="Punishments">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="TreatCycle" ColumnName="TreatCycle" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SinDegrees">
+            <EntityTypeMapping TypeName="HellDBModel.SinDegree">
+              <MappingFragment StoreEntitySet="SinDegrees">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sinners">
+            <EntityTypeMapping TypeName="HellDBModel.Sinner">
+              <MappingFragment StoreEntitySet="Sinners">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="GenderId" ColumnName="GenderId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sins">
+            <EntityTypeMapping TypeName="HellDBModel.Sin">
+              <MappingFragment StoreEntitySet="Sins">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="PunishmentId" ColumnName="PunishmentId" />
+                <ScalarProperty Name="PunisherId" ColumnName="PunisherId" />
+                <ScalarProperty Name="SinDegreeId" ColumnName="SinDegreeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="SinnerSin" TypeName="HellDBModel.SinnerSin" StoreEntitySet="SinnerSin">
+            <EndProperty Name="Sins">
+              <ScalarProperty Name="Id" ColumnName="Sins_Id" />
+            </EndProperty>
+            <EndProperty Name="Sinners">
+              <ScalarProperty Name="Id" ColumnName="Sinners_Id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <FunctionImportMapping FunctionImportName="usp_GendersDelete" FunctionName="HellDBModel.Store.usp_GendersDelete" />
+          <FunctionImportMapping FunctionImportName="usp_GendersInsert" FunctionName="HellDBModel.Store.usp_GendersInsert">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HellDBModel.usp_GendersInsert_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_GendersSelect" FunctionName="HellDBModel.Store.usp_GendersSelect">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HellDBModel.usp_GendersSelect_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_GendersUpdate" FunctionName="HellDBModel.Store.usp_GendersUpdate">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HellDBModel.usp_GendersUpdate_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_PunisherRanksDelete" FunctionName="HellDBModel.Store.usp_PunisherRanksDelete" />
+          <FunctionImportMapping FunctionImportName="usp_PunisherRanksInsert" FunctionName="HellDBModel.Store.usp_PunisherRanksInsert">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HellDBModel.usp_PunisherRanksInsert_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_PunisherRanksSelect" FunctionName="HellDBModel.Store.usp_PunisherRanksSelect">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HellDBModel.usp_PunisherRanksSelect_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_PunisherRanksUpdate" FunctionName="HellDBModel.Store.usp_PunisherRanksUpdate">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HellDBModel.usp_PunisherRanksUpdate_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_PunishersDelete" FunctionName="HellDBModel.Store.usp_PunishersDelete" />
+          <FunctionImportMapping FunctionImportName="usp_PunishersInsert" FunctionName="HellDBModel.Store.usp_PunishersInsert">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HellDBModel.usp_PunishersInsert_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="PunisherRankId" ColumnName="PunisherRankId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_PunishersSelect" FunctionName="HellDBModel.Store.usp_PunishersSelect">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HellDBModel.usp_PunishersSelect_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="PunisherRankId" ColumnName="PunisherRankId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_PunishersUpdate" FunctionName="HellDBModel.Store.usp_PunishersUpdate">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HellDBModel.usp_PunishersUpdate_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="PunisherRankId" ColumnName="PunisherRankId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_PunishmentsDelete" FunctionName="HellDBModel.Store.usp_PunishmentsDelete" />
+          <FunctionImportMapping FunctionImportName="usp_PunishmentsInsert" FunctionName="HellDBModel.Store.usp_PunishmentsInsert">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HellDBModel.usp_PunishmentsInsert_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="TreatCycle" ColumnName="TreatCycle" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_PunishmentsSelect" FunctionName="HellDBModel.Store.usp_PunishmentsSelect">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HellDBModel.usp_PunishmentsSelect_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="TreatCycle" ColumnName="TreatCycle" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_PunishmentsUpdate" FunctionName="HellDBModel.Store.usp_PunishmentsUpdate">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HellDBModel.usp_PunishmentsUpdate_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="TreatCycle" ColumnName="TreatCycle" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_SinDegreesDelete" FunctionName="HellDBModel.Store.usp_SinDegreesDelete" />
+          <FunctionImportMapping FunctionImportName="usp_SinDegreesInsert" FunctionName="HellDBModel.Store.usp_SinDegreesInsert">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HellDBModel.usp_SinDegreesInsert_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_SinDegreesSelect" FunctionName="HellDBModel.Store.usp_SinDegreesSelect">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HellDBModel.usp_SinDegreesSelect_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_SinDegreesUpdate" FunctionName="HellDBModel.Store.usp_SinDegreesUpdate">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HellDBModel.usp_SinDegreesUpdate_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_SinnersDelete" FunctionName="HellDBModel.Store.usp_SinnersDelete" />
+          <FunctionImportMapping FunctionImportName="usp_SinnerSinDelete" FunctionName="HellDBModel.Store.usp_SinnerSinDelete" />
+          <FunctionImportMapping FunctionImportName="usp_SinnerSinInsert" FunctionName="HellDBModel.Store.usp_SinnerSinInsert">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HellDBModel.usp_SinnerSinInsert_Result">
+                <ScalarProperty Name="Sinners_Id" ColumnName="Sinners_Id" />
+                <ScalarProperty Name="Sins_Id" ColumnName="Sins_Id" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_SinnerSinSelect" FunctionName="HellDBModel.Store.usp_SinnerSinSelect">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HellDBModel.usp_SinnerSinSelect_Result">
+                <ScalarProperty Name="Sinners_Id" ColumnName="Sinners_Id" />
+                <ScalarProperty Name="Sins_Id" ColumnName="Sins_Id" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_SinnersInsert" FunctionName="HellDBModel.Store.usp_SinnersInsert">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HellDBModel.usp_SinnersInsert_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="GenderId" ColumnName="GenderId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_SinnerSinUpdate" FunctionName="HellDBModel.Store.usp_SinnerSinUpdate">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HellDBModel.usp_SinnerSinUpdate_Result">
+                <ScalarProperty Name="Sinners_Id" ColumnName="Sinners_Id" />
+                <ScalarProperty Name="Sins_Id" ColumnName="Sins_Id" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_SinnersSelect" FunctionName="HellDBModel.Store.usp_SinnersSelect">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HellDBModel.usp_SinnersSelect_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="GenderId" ColumnName="GenderId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_SinnersUpdate" FunctionName="HellDBModel.Store.usp_SinnersUpdate">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HellDBModel.usp_SinnersUpdate_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="JobTitle" ColumnName="JobTitle" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="GenderId" ColumnName="GenderId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_SinsDelete" FunctionName="HellDBModel.Store.usp_SinsDelete" />
+          <FunctionImportMapping FunctionImportName="usp_SinsInsert" FunctionName="HellDBModel.Store.usp_SinsInsert">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HellDBModel.usp_SinsInsert_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="PunishmentId" ColumnName="PunishmentId" />
+                <ScalarProperty Name="PunisherId" ColumnName="PunisherId" />
+                <ScalarProperty Name="SinDegreeId" ColumnName="SinDegreeId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_SinsSelect" FunctionName="HellDBModel.Store.usp_SinsSelect">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HellDBModel.usp_SinsSelect_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="PunishmentId" ColumnName="PunishmentId" />
+                <ScalarProperty Name="PunisherId" ColumnName="PunisherId" />
+                <ScalarProperty Name="SinDegreeId" ColumnName="SinDegreeId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="usp_SinsUpdate" FunctionName="HellDBModel.Store.usp_SinsUpdate">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HellDBModel.usp_SinsUpdate_Result">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="PunishmentId" ColumnName="PunishmentId" />
+                <ScalarProperty Name="PunisherId" ColumnName="PunisherId" />
+                <ScalarProperty Name="SinDegreeId" ColumnName="SinDegreeId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
