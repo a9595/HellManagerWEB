@@ -124,6 +124,7 @@
     <Compile Include="Controllers\GridController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\SinnersController.cs" />
+    <Compile Include="Controllers\SinsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1319,6 +1320,11 @@
     <Content Include="Views\Sinners\Details.cshtml" />
     <Content Include="Views\Sinners\Edit.cshtml" />
     <Content Include="Views\Sinners\Index.cshtml" />
+    <Content Include="Views\Sins\Create.cshtml" />
+    <Content Include="Views\Sins\Delete.cshtml" />
+    <Content Include="Views\Sins\Details.cshtml" />
+    <Content Include="Views\Sins\Edit.cshtml" />
+    <Content Include="Views\Sins\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Site.css" />

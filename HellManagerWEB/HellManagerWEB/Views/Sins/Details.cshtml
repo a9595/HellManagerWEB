@@ -1,0 +1,50 @@
+﻿@model HellManagerWEB.Models.Sin
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Sin</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Punisher.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Punisher.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Punishment.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Punishment.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.SinDegree.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SinDegree.Name)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
