@@ -253,7 +253,7 @@ th {
     border: 1px solid #000;
   }
   .table {
-    border-collapse: collapse !important;
+   margin-left: 5cm;
   }
   .table td,
   .table th {
