@@ -53,6 +53,52 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Edit", "Edit", new {id = Model.Id}) |
     @Html.ActionLink("Back to List", "Index")
 </p>
+
+<br/>
+<h3>Sins</h3>
+<div>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Sins.First().Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sins.First().Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sins.First().Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sins.First().Name)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var sin in Model.Sins)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => sin.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => sin.Punishment.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => sin.Punisher.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => sin.SinDegree.Name)
+                </td>
+@*                <td>*@
+@*                    @Html.ActionLink("Edit", "Edit", new { id = sin.Id }) |*@
+@*                    @Html.ActionLink("Details", "Details", new { id = sin.Id }) |*@
+@*                    @Html.ActionLink("Delete", "Delete", new { id = sin.Id })*@
+@*                </td>*@
+            </tr>
+        }
+
+    </table>
+</div>
