@@ -73,9 +73,35 @@ namespace HellManagerWEB.Controllers
             {
                 return HttpNotFound();
             }
+            //TODO: figure it out
             ViewBag.GenderId = new SelectList(db.Genders, "Id", "Name", sinner.GenderId);
             return View(sinner);
         }
+
+
+
+        //TODO: add sinners sin
+/*
+
+ * 
+        //GET
+        public ActionResult AddSinnerSin(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Sinner sinner = db.Sinners.Find(id);
+            if (sinner == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.
+            
+
+            return View(sinner);
+        }
+*/
 
         // POST: Sinners/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
