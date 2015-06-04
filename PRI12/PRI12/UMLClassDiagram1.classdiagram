@@ -1,0 +1,144 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<logicalClassDesignerModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/ModelStore" dslVersion="1.0.0.0" Id="5f860ffc-5b6f-4f12-a99d-eb36883067ea" name="UMLClassDiagram1" linkedPackageId="1b1a6ade-0268-4c2f-a8f9-c24d42e4e461" xmlns="http://schemas.microsoft.com/dsltools/LogicalClassDesigner">
+  <profileInstances>
+    <packageHasProfileInstances Id="6e91f05c-6ec0-4da1-b825-b4786f5a98e2">
+      <profileInstance Id="12828ac8-76bf-43ac-9c8a-f1936c069b7b" name="StandardProfileL2">
+        <elementDefinition Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791" />
+      </profileInstance>
+      <elementDefinition Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances Id="8a47c0d2-82a1-41bf-86d6-7439bff5a169">
+      <profileInstance Id="494eaffd-ba7a-410f-808d-fe2bdd62487d" name="StandardProfileL3">
+        <elementDefinition Id="532ea607-fb19-44b8-8502-3351b05452be" />
+      </profileInstance>
+      <elementDefinition Id="29349502-908c-4fda-9054-c48619c59ed0" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="c196c08f-54ef-44f7-8dc0-20de9550e881" name="Company" isAbstract="true" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="139a99ab-b755-46b5-93e7-0a531fe6a24b" />
+        <ownedAttributesInternal>
+          <property Id="67d4ad2f-6d8b-459b-ae06-a7441e4d7a86" name="Name" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="baf44fdb-109d-405e-bb78-db975dc73989" />
+          </property>
+          <property Id="ec33f86c-3d17-47bd-b881-62fc18dc7762" name="Nip" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="cd702cf3-4c83-4bf4-9c4a-1952047631d5" />
+          </property>
+          <property Id="23173d85-c43d-4589-901f-b17a489a647a" name="address" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="6edc0e3f-cebd-45a9-82c5-83cec6cd8832" />
+          </property>
+          <property Id="07b7f6ca-9454-424a-bf15-a926e5d994df" name="tel_number" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <lowerValueInternal>
+              <literalString Id="e5d5e646-a08b-4736-90d8-a2220c86be19" name="Lower" value="0">
+                <elementDefinition Id="c33d013e-465e-4c6a-b3e0-a4cedf91863e" />
+              </literalString>
+            </lowerValueInternal>
+            <upperValueInternal>
+              <literalString Id="4d092198-b092-47ea-ae05-341bdfb7ce6a" name="Upper" value="1">
+                <elementDefinition Id="30d74a23-13f3-4e54-9426-606138b61c0c" />
+              </literalString>
+            </upperValueInternal>
+            <elementDefinition Id="7487b698-8f23-4f93-8db9-9dab68f5ac75" />
+          </property>
+        </ownedAttributesInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="a1d7e62d-0f50-4136-9608-0425d4be57f5" name="Furniture peace" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="0b064413-9d7f-4491-90ad-9090213cbfbe" />
+        <ownedAttributesInternal>
+          <property Id="342c8209-5ae1-4e0d-b0c4-a1122aaa07b0" name="Name (unique)" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="c0f9d144-0f2e-4661-9725-d263308d32e8" />
+          </property>
+          <property Id="03ddaf3d-1cde-4b5a-8cd1-87f02f2be7a8" name="Price" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="c3a06902-6530-4e9a-8e1c-b031a0e427f1" />
+          </property>
+          <property Id="ef5d45b1-064d-4b4b-8ee4-5ee463f51853" name="Cost" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="4b8ca7cc-3a6b-4dc8-9ccd-c2f918040af4" />
+          </property>
+          <property Id="68194a4a-11ca-4a0a-ac96-670d7344d0b9" name="Hours of work" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="45893cc4-cdce-41a2-a40d-2b4f053d3b96" />
+          </property>
+        </ownedAttributesInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="943e7761-a699-4daf-b329-7811c62a4111" name="Element (abstract)" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="68b892b8-b54f-40e9-a5cb-f0a3baca99a7" />
+        <ownedAttributesInternal>
+          <property Id="0dc4dc42-039c-472a-b9c3-78db73240a24" name="Phone" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="1b19b00f-05c4-44ac-9b97-66f427689ee4" />
+          </property>
+          <property Id="65a8abb6-e581-4c0f-9d1c-d0e7e528c68c" name="Price" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="3c7dc12f-06ba-4f2c-9d3a-ed72b2a816f8" />
+          </property>
+        </ownedAttributesInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="a4d8907e-42da-4120-af7f-a86ab3d4c00c" name="Customer" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="2d5bfec1-3f98-4d96-bad8-9dc4380881d3" />
+        <ownedAttributesInternal>
+          <property Id="da4417ea-86c6-429f-85b1-a58e512750d8" name="Discount" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="e220ba30-c26b-41c6-bbd8-9540c21e2932" />
+          </property>
+          <property Id="caeee05c-6fe2-4ba4-b526-af0c2e7e298e" name="list of addresses" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <lowerValueInternal>
+              <literalString Id="45de50b3-2cb7-454e-b30c-3b3c0c6fad4e" name="Lower" value="1">
+                <elementDefinition Id="71bcfa35-3eb9-4758-85e7-1f719adc1051" />
+              </literalString>
+            </lowerValueInternal>
+            <upperValueInternal>
+              <literalString Id="8395de0a-3859-4063-9919-c55e2008cf40" name="Upper" value="*">
+                <elementDefinition Id="dae1d2f9-3796-4fb2-a29f-57aae713abd4" />
+              </literalString>
+            </upperValueInternal>
+            <elementDefinition Id="2d2cdd48-cd78-4d4a-a00a-5b3fd1cbb053" />
+          </property>
+        </ownedAttributesInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="1a0ffb7d-db9b-4a1b-838b-42b54826fdb5" name="Employee" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="d599883c-100c-47c7-a796-113a39121899" />
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="e271245b-944a-4460-984f-8369b8507eac" name="Suplier" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="e7881838-f2d1-4c2e-bfd3-7b2ca9d8dc49" />
+      </class>
+    </logicalClassDesignerModelHasTypes>
+    <logicalClassDesignerModelHasTypes>
+      <class Id="b2a9e0f3-2216-4627-b463-bb434a8554e6" name="Customer" isAbstract="false" isLeaf="false" isActiveClass="false">
+        <elementDefinition Id="b61ab913-e663-4a5f-8eb5-17fa0cc0a957" />
+        <ownedAttributesInternal>
+          <property Id="00b6e0f1-0a52-44bd-bdfb-33fa16b29093" name="discount" isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <elementDefinition Id="94aa8c66-03ad-44d8-9d3e-b91f91b7c911" />
+          </property>
+          <property Id="416ed914-516d-40ed-b8fc-8da2aebd4dcb" name="list of ..." isLeaf="false" isStatic="false" isReadOnly="false" isUnique="false" isDerived="false" isDerivedUnion="false" aggregation="None" isComposite="false">
+            <lowerValueInternal>
+              <literalString Id="abe1c19f-1c30-43ea-81cb-b967958ca363" name="Lower" value="1">
+                <elementDefinition Id="e5fd00f9-0296-4b57-b541-03f328f213f5" />
+              </literalString>
+            </lowerValueInternal>
+            <upperValueInternal>
+              <literalString Id="de943151-7d3e-460f-84fd-4f2841d63a05" name="Upper" value="*">
+                <elementDefinition Id="012cce50-4c03-475b-a17c-ede0e9b5a73f" />
+              </literalString>
+            </upperValueInternal>
+            <elementDefinition Id="98b413bc-ec6a-4749-8c43-8abcfa4698d0" />
+          </property>
+        </ownedAttributesInternal>
+        <ownedOperationsInternal>
+          <operation Id="489ac538-d321-481b-bf68-16318bb88dd3" name="Rainking" isLeaf="false" isStatic="false" isAbstract="false" concurrency="Sequential" isQuery="false">
+            <elementDefinition Id="67bbee5f-35e8-4c1f-a635-481fa8130827" />
+          </operation>
+        </ownedOperationsInternal>
+      </class>
+    </logicalClassDesignerModelHasTypes>
+  </packagedElements>
+  <package Id="1b1a6ade-0268-4c2f-a8f9-c24d42e4e461" name="PRI12">
+    <elementDefinition Id="4dc4b884-2056-4935-9a1f-b88002fdc750" />
+  </package>
+</logicalClassDesignerModel>

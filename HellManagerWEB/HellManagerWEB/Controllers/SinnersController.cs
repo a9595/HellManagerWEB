@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using HellManagerWEB.Models;
 
@@ -81,27 +78,41 @@ namespace HellManagerWEB.Controllers
 
 
         //TODO: add sinners sin
-/*
+//
+// 
+//        //GET
+//        public ActionResult AddSinnerSin(int? id)
+//        {
+//            if (id == null)
+//            {
+//                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+//            }
+//            Sinner sinner = db.Sinners.Find(id);
+//            if (sinner == null)
+//            {
+//                return HttpNotFound();
+//            }
+//            ViewBag.SinnerSin = new SelectList(db.Sins, "Id", "Name");
+//            return View(sinner);
+//        }
 
- * 
-        //GET
-        public ActionResult AddSinnerSin(int? id)
+        // POST: Sinners/Edit/5
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult AddSinnerSin([Bind(Include = "Id,FullName,Age,JobTitle,Salary,GenderId")] Sin sin)
         {
-            if (id == null)
+            if (ModelState.IsValid)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                db.Entry(sin).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
-            Sinner sinner = db.Sinners.Find(id);
-            if (sinner == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.
-            
-
-            return View(sinner);
+            ViewBag.GenderId = new SelectList(db.Sins, "Id", "Name", sin.Id);
+            return View(sin);
         }
-*/
+
 
         // POST: Sinners/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 

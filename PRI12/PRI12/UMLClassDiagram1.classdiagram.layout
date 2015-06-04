@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<logicalClassDesignerDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 14, 8.5" name="UMLClassDiagram1">
+  <logicalClassDesignerModelMoniker Id="5f860ffc-5b6f-4f12-a99d-eb36883067ea" />
+  <nestedChildShapes>
+    <classShape Id="f7cbfd89-33c5-43c8-8c49-741a2e6c0691" absoluteBounds="12.25, 1.125, 1.5, 1.5429687152306237" hideQualifiedName="false" increaseHeight="0" customColor="181, 193, 223">
+      <classMoniker Id="c196c08f-54ef-44f7-8dc0-20de9550e881" LastKnownName="Company" />
+      <nestedChildShapes>
+        <AttributeElementListCompartment Id="be8e711a-b942-4b0d-8f0a-006dd2ea29a3" absoluteBounds="12.265, 1.5150000000000001, 1.4700000000000002, 0.84179684768120444" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <OperationElementListCompartment Id="e07d0aa3-e91d-4792-a279-6d7f623b9f2a" absoluteBounds="12.265, 2.3667968476812042, 1.4700000000000002, 0.20117186754941963" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="44a73e7f-4a5c-4e0a-9702-bc65a2258525" absoluteBounds="5.125, 1.75, 1.5, 1.5429687152306237" hideQualifiedName="false" increaseHeight="0" customColor="181, 193, 223">
+      <classMoniker Id="a1d7e62d-0f50-4136-9608-0425d4be57f5" LastKnownName="Furniture peace" />
+      <nestedChildShapes>
+        <AttributeElementListCompartment Id="064312ff-32ff-4fb7-9a73-68a3869b9ab7" absoluteBounds="5.1400000000000006, 2.14, 1.4700000000000002, 0.84179684768120444" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <OperationElementListCompartment Id="6c2d0fc4-38de-4622-bfb9-33ef1bd4515d" absoluteBounds="5.1400000000000006, 2.9917968476812042, 1.4700000000000002, 0.20117186754941963" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="dc4de788-0251-4bf5-8b37-62d51b3cbdf6" absoluteBounds="1.375, 3.5, 2.375, 1.2226562251647311" hideQualifiedName="false" increaseHeight="0" customColor="181, 193, 223">
+      <classMoniker Id="943e7761-a699-4daf-b329-7811c62a4111" LastKnownName="Element (abstract)" />
+      <nestedChildShapes>
+        <AttributeElementListCompartment Id="f4f7e53e-3693-4dde-9b2a-5df4a2ef1734" absoluteBounds="1.39, 3.89, 2.3449999999999998, 0.52148435761531187" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <OperationElementListCompartment Id="61c6221f-d555-4e98-8dc3-70a1831f21d1" absoluteBounds="1.39, 4.421484357615312, 2.3449999999999998, 0.20117186754941951" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="74d166ad-4be8-4be3-8e2c-b4e7ca916225" absoluteBounds="9.25, 2.25, 1.5, 1.2226562251647315" hideQualifiedName="false" increaseHeight="0" customColor="181, 193, 223">
+      <classMoniker Id="a4d8907e-42da-4120-af7f-a86ab3d4c00c" LastKnownName="Customer" />
+      <nestedChildShapes>
+        <AttributeElementListCompartment Id="2dd60c0e-8ad1-443e-9dc5-924dd3264393" absoluteBounds="9.265, 2.64, 1.4700000000000002, 0.52148435761531187" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <OperationElementListCompartment Id="f98a11db-4875-4abe-b347-5f65bfa33475" absoluteBounds="9.265, 3.171484357615312, 1.4700000000000002, 0.20117186754941951" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="3d8f5d8e-8791-4e16-8654-ca250845b5d7" absoluteBounds="7.5, 4.375, 1.5, 0.90234373509883881" hideQualifiedName="false" increaseHeight="0" customColor="181, 193, 223">
+      <classMoniker Id="1a0ffb7d-db9b-4a1b-838b-42b54826fdb5" LastKnownName="Employee" />
+      <nestedChildShapes>
+        <AttributeElementListCompartment Id="0aa0e79b-4db7-41e5-9c55-67632b51cc5b" absoluteBounds="7.515, 4.765, 1.4700000000000002, 0.2011718675494194" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <OperationElementListCompartment Id="547e84dd-dae8-4b07-a546-035e0c9c9be9" absoluteBounds="7.515, 4.97617186754942, 1.4700000000000002, 0.2011718675494194" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="a3391ab7-235b-4ae0-8ca5-c7a1e108a566" absoluteBounds="9.5, 4.375, 1.5, 0.90234373509883881" hideQualifiedName="false" increaseHeight="0" customColor="181, 193, 223">
+      <classMoniker Id="e271245b-944a-4460-984f-8369b8507eac" LastKnownName="Suplier" />
+      <nestedChildShapes>
+        <AttributeElementListCompartment Id="e237d7ce-c78c-4410-acae-c98a7dd2e5ee" absoluteBounds="9.515, 4.765, 1.4700000000000002, 0.2011718675494194" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <OperationElementListCompartment Id="8dd24bdb-3827-4654-ac87-8d22cc58db10" absoluteBounds="9.515, 4.97617186754942, 1.4700000000000002, 0.2011718675494194" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="3b73a3e5-8ea0-4097-87ad-be211cef593a" absoluteBounds="4.875, 4.375, 1.5, 1.3828124701976776" hideQualifiedName="false" increaseHeight="0" customColor="181, 193, 223">
+      <classMoniker Id="b2a9e0f3-2216-4627-b463-bb434a8554e6" LastKnownName="Customer" />
+      <nestedChildShapes>
+        <AttributeElementListCompartment Id="ab9e8754-9ef8-4f41-b369-73fe9b82e6fd" absoluteBounds="4.89, 4.765, 1.4700000000000002, 0.52148435761531187" name="AttributesCompartment" titleTextColor="Black" itemTextColor="Black" />
+        <OperationElementListCompartment Id="8c2811e1-cba2-42bf-934f-c15bd7259ce4" absoluteBounds="4.89, 5.296484357615312, 1.4700000000000002, 0.36132811258236563" name="OperationsCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</logicalClassDesignerDiagram>

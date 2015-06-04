@@ -1352,6 +1352,7 @@
     <Content Include="Views\Punishers\Details.cshtml" />
     <Content Include="Views\Punishers\Edit.cshtml" />
     <Content Include="Views\Punishers\Index.cshtml" />
+    <Content Include="Views\Sinners\AddSinnerSin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Site.css" />
