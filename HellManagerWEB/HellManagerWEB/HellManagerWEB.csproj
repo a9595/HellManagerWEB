@@ -179,6 +179,7 @@
     <Compile Include="Models\Sinner.cs">
       <DependentUpon>EFModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SinnerWithSins.cs" />
     <Compile Include="Models\usp_GendersInsert_Result.cs">
       <DependentUpon>EFModel.tt</DependentUpon>
     </Compile>
@@ -1352,7 +1353,7 @@
     <Content Include="Views\Punishers\Details.cshtml" />
     <Content Include="Views\Punishers\Edit.cshtml" />
     <Content Include="Views\Punishers\Index.cshtml" />
-    <Content Include="Views\Sinners\AddSinnerSin.cshtml" />
+    <Content Include="Views\Sinners\CreateWithSins.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\Site.css" />

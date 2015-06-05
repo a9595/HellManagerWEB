@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
@@ -40,6 +41,7 @@ namespace HellManagerWEB.Controllers
             return View();
         }
 
+
         // POST: Sinners/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -58,6 +60,37 @@ namespace HellManagerWEB.Controllers
             return View(sinner);
         }
 
+        // GET: Sinners/Create
+        public ActionResult CreateWithSins()
+        {
+            SinnerWithSins sinnerWithSins = new SinnerWithSins
+            {
+                Sins = new List<Sin>(db.Sins)
+            };
+
+
+
+            ViewBag.GenderId = new SelectList(db.Genders, "Id", "Name");
+            return View(sinnerWithSins);
+        }
+
+        [HttpPost]
+        public ActionResult CreateWithSins(SinnerWithSins sinnerWithSins)
+        {
+            if (ModelState.IsValid)
+            {
+                var createdSinner = sinnerWithSins.Sinner;
+                List<Sin> sinnerSins = new List<Sin>(db.Sins.Where(sin => sinnerWithSins.SinsSelectedIndexes.Contains(sin.Id)));
+                createdSinner.Sins = sinnerSins;
+
+                db.Sinners.Add(createdSinner);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.GenderId = new SelectList(db.Genders, "Id", "Name", sinnerWithSins.Sinner.GenderId);
+            return View(sinnerWithSins);
+        }
         // GET: Sinners/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -73,44 +106,6 @@ namespace HellManagerWEB.Controllers
             //TODO: figure it out
             ViewBag.GenderId = new SelectList(db.Genders, "Id", "Name", sinner.GenderId);
             return View(sinner);
-        }
-
-
-
-        //TODO: add sinners sin
-//
-// 
-//        //GET
-//        public ActionResult AddSinnerSin(int? id)
-//        {
-//            if (id == null)
-//            {
-//                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-//            }
-//            Sinner sinner = db.Sinners.Find(id);
-//            if (sinner == null)
-//            {
-//                return HttpNotFound();
-//            }
-//            ViewBag.SinnerSin = new SelectList(db.Sins, "Id", "Name");
-//            return View(sinner);
-//        }
-
-        // POST: Sinners/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult AddSinnerSin([Bind(Include = "Id,FullName,Age,JobTitle,Salary,GenderId")] Sin sin)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(sin).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.GenderId = new SelectList(db.Sins, "Id", "Name", sin.Id);
-            return View(sin);
         }
 
 
