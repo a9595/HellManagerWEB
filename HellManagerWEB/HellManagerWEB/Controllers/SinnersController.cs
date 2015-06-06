@@ -47,7 +47,7 @@ namespace HellManagerWEB.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,FullName,Age,JobTitle,Salary,GenderId")] Sinner sinner)
+        public ActionResult Create(Sinner sinner)
         {
             if (ModelState.IsValid)
             {
@@ -59,31 +59,21 @@ namespace HellManagerWEB.Controllers
             ViewBag.GenderId = new SelectList(db.Genders, "Id", "Name", sinner.GenderId);
             return View(sinner);
         }
-
-        // GET: Sinners/Create
-        public ActionResult CreateWithSins()
-        {
-            SinnerWithSins sinnerWithSins = new SinnerWithSins
-            {
-                Sins = new List<Sin>(db.Sins)
-            };
-
-
-
-            ViewBag.GenderId = new SelectList(db.Genders, "Id", "Name");
-            return View(sinnerWithSins);
-        }
-
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult CreateWithSins(SinnerWithSins sinnerWithSins)
         {
             if (ModelState.IsValid)
             {
-                var createdSinner = sinnerWithSins.Sinner;
                 List<Sin> sinnerSins = new List<Sin>(db.Sins.Where(sin => sinnerWithSins.SinsSelectedIndexes.Contains(sin.Id)));
-                createdSinner.Sins = sinnerSins;
+                sinnerWithSins.Sinner.Sins = sinnerSins;
+                sinnerWithSins.Sinner.GenderId = sinnerWithSins.SelectedGenderId;
+                sinnerWithSins.Sinner.Gender = db.Genders.First(gender => sinnerWithSins.SelectedGenderId == gender.Id);
 
-                db.Sinners.Add(createdSinner);
+               
+
+
+                db.Sinners.Add(sinnerWithSins.Sinner);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -91,6 +81,33 @@ namespace HellManagerWEB.Controllers
             ViewBag.GenderId = new SelectList(db.Genders, "Id", "Name", sinnerWithSins.Sinner.GenderId);
             return View(sinnerWithSins);
         }
+
+//        // GET: Sinners/Create
+//        public ActionResult CreateWithSins()
+//        {
+//            SinnerWithSins sinnerWithSins = new SinnerWithSins
+//            {
+//                Sins = new List<Sin>(db.Sins)
+//            };
+//
+//            ViewBag.GenderId = new SelectList(db.Genders, "Id", "Name");
+//            return View(sinnerWithSins);
+//        }
+
+        // GET: Sinners/Create
+        public ActionResult CreateWithSins()
+        {
+            SinnerWithSins sinnerWithSins = new SinnerWithSins
+            {
+                Sins = new List<Sin>(db.Sins),
+                Gender = new List<Gender>(db.Genders)
+            };
+
+            ViewBag.GenderId = new SelectList(db.Genders, "Id", "Name");
+            return View(sinnerWithSins);
+        }
+
+       
         // GET: Sinners/Edit/5
         public ActionResult Edit(int? id)
         {
