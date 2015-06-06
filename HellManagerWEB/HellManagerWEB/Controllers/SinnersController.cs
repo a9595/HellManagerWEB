@@ -70,9 +70,6 @@ namespace HellManagerWEB.Controllers
                 sinnerWithSins.Sinner.GenderId = sinnerWithSins.SelectedGenderId;
                 sinnerWithSins.Sinner.Gender = db.Genders.First(gender => sinnerWithSins.SelectedGenderId == gender.Id);
 
-               
-
-
                 db.Sinners.Add(sinnerWithSins.Sinner);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -164,8 +161,26 @@ namespace HellManagerWEB.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Sinner sinner = db.Sinners.Find(id);
+            List<Sin> sinnerSins = new List<Sin>(sinner.Sins);
+
+            foreach (Sin sin in sinnerSins)
+            {
+                db.usp_SinnerSinDelete(sinner.Id, sin.Id);
+                db.SaveChanges();
+
+            }
+
             db.Sinners.Remove(sinner);
-            db.SaveChanges();
+
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (Exception EX_NAME)
+            {
+                db.Sinners.Remove(sinner);
+            }
             return RedirectToAction("Index");
         }
 
