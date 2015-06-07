@@ -92,11 +92,10 @@
                 <td>
                     @Html.DisplayFor(modelItem => sin.SinDegree.Name)
                 </td>
-@*                <td>*@
-@*                    @Html.ActionLink("Edit", "Edit", new { id = sin.Id }) |*@
-@*                    @Html.ActionLink("Details", "Details", new { id = sin.Id }) |*@
-@*                    @Html.ActionLink("Delete", "Delete", new { id = sin.Id })*@
-@*                </td>*@
+                <td>
+                    @Html.ActionLink("Edit", "EditSinnerSin", new { sinId = sin.Id, Model.Id}) |
+                    @Html.ActionLink("Delete", "DeleteSinnerSin", new { sinId = sin.Id, sinnerId = Model.Id })
+                </td>
             </tr>
         }
 

@@ -79,17 +79,17 @@ namespace HellManagerWEB.Controllers
             return View(sinnerWithSins);
         }
 
-//        // GET: Sinners/Create
-//        public ActionResult CreateWithSins()
-//        {
-//            SinnerWithSins sinnerWithSins = new SinnerWithSins
-//            {
-//                Sins = new List<Sin>(db.Sins)
-//            };
-//
-//            ViewBag.GenderId = new SelectList(db.Genders, "Id", "Name");
-//            return View(sinnerWithSins);
-//        }
+        //        // GET: Sinners/Create
+        //        public ActionResult CreateWithSins()
+        //        {
+        //            SinnerWithSins sinnerWithSins = new SinnerWithSins
+        //            {
+        //                Sins = new List<Sin>(db.Sins)
+        //            };
+        //
+        //            ViewBag.GenderId = new SelectList(db.Genders, "Id", "Name");
+        //            return View(sinnerWithSins);
+        //        }
 
         // GET: Sinners/Create
         public ActionResult CreateWithSins()
@@ -104,7 +104,7 @@ namespace HellManagerWEB.Controllers
             return View(sinnerWithSins);
         }
 
-       
+
         // GET: Sinners/Edit/5
         public ActionResult Edit(int? id)
         {
@@ -191,6 +191,34 @@ namespace HellManagerWEB.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public ActionResult EditSinnerSin(int id)
+        {
+            //TODO: redirect to sin edit page
+            //  @Html.ActionLink("Sins", "Edit", new { id = item.Id }) |
+
+            //            return RedirectToAction("B",
+            //                        "FileUploadMsgView",
+            //                        new { FileUploadMsg = "File uploaded successfully" });
+
+            throw new NotImplementedException();
+        }
+
+
+        public ActionResult DeleteSinnerSin(int sinId, int sinnerId)
+        {
+            Sinner sinner = db.Sinners.Find(sinnerId);
+            Sin sinnerSin = sinner.Sins.First(sin => sin.Id == sinId);
+
+            //sinner.Sins.Remove(sinnerSin);
+
+            db.usp_SinnerSinDelete(sinnerId, sinId);
+            db.SaveChanges();
+
+            String way = string.Format("Details/{0}", sinnerId);
+            return RedirectToAction(way);
+            throw new NotImplementedException();
         }
     }
 }
