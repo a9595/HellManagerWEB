@@ -123,33 +123,13 @@ namespace HellManagerWEB.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Sin sin = db.Sins.Find(id);
-
-            List<Sinner> sinnerSins = new List<Sinner>(sin.Sinners);
-
-            foreach (Sinner sinner in sinnerSins)
-            {
-                db.usp_SinnerSinDelete(sinner.Id, sin.Id);
-                db.SaveChanges();
-            }
-
             db.Sins.Remove(sin);
-
-        
-
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (Exception exception)
-            {
-                db.Sins.Remove(sin);
-            }
-            //db.SaveChanges();
+            db.SaveChanges();
 
             return RedirectToAction("Index");
         }
 
-        
+
 
         protected override void Dispose(bool disposing)
         {

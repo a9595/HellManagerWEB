@@ -161,24 +161,8 @@ namespace HellManagerWEB.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Sinner sinner = db.Sinners.Find(id);
-
-            List<Sin> sinnerSins = new List<Sin>(sinner.Sins);
-
-            foreach (Sin sin in sinnerSins)
-            {
-                db.usp_SinnerSinDelete(sinner.Id, sin.Id);
-                db.SaveChanges();
-            }
-
             db.Sinners.Remove(sinner);
-            try
-            {
-                db.SaveChanges();
-            }
-            catch (Exception exception)
-            {
-                // ignored
-            }
+            db.SaveChanges();
             return RedirectToAction("Index");
         }
 
