@@ -571,6 +571,17 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Images\200.png" />
+    <Content Include="Images\back.png" />
+    <Content Include="Images\create new.png" />
+    <Content Include="Images\delete.png" />
+    <Content Include="Images\details.png" />
+    <Content Include="Images\done.png" />
+    <Content Include="Images\edit.png" />
+    <Content Include="Images\hellmanager logo.png" />
+    <Content Include="Images\punisher.png" />
+    <Content Include="Images\punishment.png" />
+    <Content Include="Images\sin.png" />
+    <Content Include="Images\sinner.png" />
     <Content Include="packages.config" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

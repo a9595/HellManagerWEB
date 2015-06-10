@@ -109,18 +109,18 @@
     <div class="container-fluid">
         <div class="row k-header">
             <h1>Hell Manager</h1>
+
             <div id="responsive-panel">
                 @(Html.Kendo().Menu()
-                  .Name("Menu")
-                  .Items(items =>
-                  {
-                      items.Add().Text("Sinners").Action("Index", "Sinners");
-                      items.Add().Text("Sins").Action("Index", "Sins");
-                      items.Add().Text("Punishments").Action("Index", "Punishments");
-                      items.Add().Text("Punishers").Action("Index", "Punishers");
-                      items.Add().Text("SinnerWithSins").Action("CreateWithSins", "Sinners");
-                  })
-                )
+                      .Name("Menu")
+                      .Items(items =>
+                      {
+                          items.Add().Text("Sinners").Action("Index", "Sinners");
+                          items.Add().Text("Sins").Action("Index", "Sins");
+                          items.Add().Text("Punishments").Action("Index", "Punishments");
+                          items.Add().Text("Punishers").Action("Index", "Punishers");
+                      })
+                      )
             </div>
             <button id="configure" class="k-rpanel-toggle k-button k-primary btn-toggle"><span class="k-icon k-i-hbars"></span></button>
         </div>

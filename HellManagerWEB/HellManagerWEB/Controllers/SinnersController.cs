@@ -79,18 +79,6 @@ namespace HellManagerWEB.Controllers
             return View(sinnerWithSins);
         }
 
-        //        // GET: Sinners/Create
-        //        public ActionResult CreateWithSins()
-        //        {
-        //            SinnerWithSins sinnerWithSins = new SinnerWithSins
-        //            {
-        //                Sins = new List<Sin>(db.Sins)
-        //            };
-        //
-        //            ViewBag.GenderId = new SelectList(db.Genders, "Id", "Name");
-        //            return View(sinnerWithSins);
-        //        }
-
         // GET: Sinners/Create
         public ActionResult CreateWithSins()
         {
@@ -105,41 +93,7 @@ namespace HellManagerWEB.Controllers
         }
 
 
-        // GET: Sinners/Edit/5
-        public ActionResult Edit(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Sinner sinner = db.Sinners.Find(id);
-            if (sinner == null)
-            {
-                return HttpNotFound();
-            }
-            //TODO: figure it out
-            ViewBag.GenderId = new SelectList(db.Genders, "Id", "Name", sinner.GenderId);
-            return View(sinner);
-        }
-
-
-        // POST: Sinners/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,FullName,Age,JobTitle,Salary,GenderId")] Sinner sinner)
-        {
-            if (ModelState.IsValid)
-            {
-                db.Entry(sinner).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            ViewBag.GenderId = new SelectList(db.Genders, "Id", "Name", sinner.GenderId);
-            return View(sinner);
-        }
-
+      
         // GET: Sinners/Delete/5
         public ActionResult Delete(int? id)
         {
